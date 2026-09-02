@@ -7,16 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-oscuro: #020203;
-            --bg-panel: #060609;
-            --bg-card: rgba(10, 10, 15, 0.85);
+            /* Tema Vinotinto Profundo */
+            --bg-oscuro: #0a0203; 
+            --bg-panel: #140507;
+            --bg-card: rgba(26, 7, 10, 0.85);
             --texto-claro: #f8fafc;
-            --texto-gris: #94a3b8;
-            --cobre: #f59e0b; 
-            --cobre-hover: #fbbf24;
-            --cobre-brillo: rgba(245, 158, 11, 0.3);
-            --borde: rgba(255, 255, 255, 0.08);
-            --borde-hover: rgba(245, 158, 11, 0.5);
+            --texto-gris: #b3a6a6;
+            --cobre: #c91c33; 
+            --cobre-hover: #eb2843;
+            --cobre-brillo: rgba(201, 28, 51, 0.35);
+            --borde: rgba(201, 28, 51, 0.15);
+            --borde-hover: rgba(201, 28, 51, 0.6);
         }
 
         html { scroll-behavior: smooth; scroll-padding-top: 100px; }
@@ -31,16 +32,14 @@
             overflow-x: hidden;
         }
 
-        /* Cursor Láser Atmosférico */
         .cursor-luz {
             position: fixed; top: 0; left: 0; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, rgba(0,0,0,0) 70%);
+            background: radial-gradient(circle, rgba(201, 28, 51, 0.08) 0%, rgba(0,0,0,0) 70%);
             transform: translate(-50%, -50%); pointer-events: none; z-index: 9998;
         }
 
-        /* Toast de Notificación Avanzado */
         #toastNotificacion {
-            position: fixed; bottom: 40px; left: 40px; background: rgba(8, 8, 12, 0.95); backdrop-filter: blur(20px);
+            position: fixed; bottom: 40px; left: 40px; background: rgba(10, 2, 3, 0.95); backdrop-filter: blur(20px);
             border: 1px solid var(--cobre); color: var(--texto-claro); padding: 18px 30px; border-radius: 8px; z-index: 6000;
             font-family: 'Oswald', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; font-size: 13px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 25px var(--cobre-brillo); transform: translateY(120px); opacity: 0;
@@ -48,7 +47,6 @@
         }
         #toastNotificacion.mostrar { transform: translateY(0); opacity: 1; }
 
-        /* Preloader Estilo Estudio */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-oscuro); z-index: 99999;
@@ -68,12 +66,11 @@
         @keyframes cargarLinea { 0% { left: -100%; } 100% { left: 100%; } }
         @keyframes latido { 0% { transform: scale(0.98); opacity: 0.6; } 100% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 40px var(--cobre-brillo); } }
 
-        .revelar { opacity: 0; transform: translateY(50px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .revelar { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .revelar.activo { opacity: 1; transform: translateY(0); }
 
-        /* Navegación Glassmorphism */
         .navbar {
-            background-color: rgba(2, 2, 3, 0.85); padding: 22px 60px;
+            background-color: rgba(6, 1, 2, 0.85); padding: 22px 60px;
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 2000;
             border-bottom: 1px solid var(--borde); backdrop-filter: blur(25px);
@@ -98,11 +95,10 @@
             background: transparent; color: var(--cobre); border: 1px solid var(--cobre); padding: 10px 20px;
             font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 1.5px; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-transform: uppercase; border-radius: 4px;
         }
-        .btn-custom:hover { background-color: var(--cobre); color: #000; box-shadow: 0 0 35px var(--cobre-brillo); font-weight: 700; }
+        .btn-custom:hover { background-color: var(--cobre); color: #fff; box-shadow: 0 0 35px var(--cobre-brillo); font-weight: 700; }
 
-        /* Carrito Drawer Estilizado */
         #carritoDrawer {
-            position: fixed; top: 0; right: -480px; width: 440px; height: 100%; background: rgba(5, 5, 8, 0.98);
+            position: fixed; top: 0; right: -480px; width: 440px; height: 100%; background: rgba(10, 2, 4, 0.98);
             backdrop-filter: blur(30px); border-left: 1px solid var(--borde); z-index: 3000; transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex; flex-direction: column; padding: 35px; box-sizing: border-box; box-shadow: -30px 0 80px rgba(0,0,0,0.9);
         }
@@ -118,30 +114,30 @@
         .carrito-item-info span { font-size: 14px; color: var(--cobre); font-weight: 700; font-family: 'Oswald', sans-serif; }
         
         .controles-cantidad { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
-        .btn-cant { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid var(--borde); width: 24px; height: 24px; cursor: pointer; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        .btn-cant:hover { background: var(--cobre); color: #000; border-color: var(--cobre); }
-        .btn-eliminar { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 12px; font-family: 'Manrope', sans-serif; opacity: 0.8; transition: opacity 0.2s; }
+        .btn-cant { background: rgba(255,255,255,0.06); color: #fff; border: 1px solid var(--borde); width: 24px; height: 24px; cursor: pointer; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; }
+        .btn-cant:hover { background: var(--cobre); color: #fff; border-color: var(--cobre); }
+        .btn-eliminar { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 12px; font-family: 'Manrope', sans-serif; opacity: 0.8; }
         .btn-eliminar:hover { opacity: 1; text-decoration: underline; }
 
         .carrito-footer { border-top: 1px solid var(--borde); padding-top: 25px; }
         .carrito-total { display: flex; justify-content: space-between; font-family: 'Oswald', sans-serif; font-size: 22px; margin-bottom: 25px; letter-spacing: 1px; }
         .btn-checkout {
-            width: 100%; background-color: var(--cobre); color: #000; padding: 18px; border: none; font-family: 'Oswald', sans-serif;
+            width: 100%; background-color: var(--cobre); color: #fff; padding: 18px; border: none; font-family: 'Oswald', sans-serif;
             text-transform: uppercase; letter-spacing: 2px; font-size: 15px; font-weight: 700; cursor: pointer; border-radius: 6px; transition: all 0.3s;
         }
-        .btn-checkout:hover { background-color: #fff; box-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        .btn-checkout:hover { background-color: #fff; color: #000; box-shadow: 0 0 30px rgba(255,255,255,0.3); }
 
-        /* Modales Generales */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 2, 3, 0.88); backdrop-filter: blur(30px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 1, 2, 0.88); backdrop-filter: blur(30px);
             z-index: 4500; display: none; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; overflow-y: auto;
         }
         .modal-contenido {
-            background: rgba(10, 10, 15, 0.98); border: 1px solid rgba(245, 158, 11, 0.4); max-width: 600px; width: 100%; padding: 45px; border-radius: 12px; position: relative;
+            background: rgba(15, 4, 6, 0.98); border: 1px solid var(--cobre); max-width: 600px; width: 100%; padding: 45px; border-radius: 12px; position: relative;
             box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 45px var(--cobre-brillo); margin: 40px auto; backdrop-filter: blur(25px);
         }
         .modal-contenido h3 { font-family: 'Oswald', sans-serif; font-size: 28px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1.5px; color: #fff; }
         .modal-contenido p.sub-check { color: var(--texto-gris); font-size: 13px; margin-bottom: 25px; }
+        
         .form-grupo { margin-bottom: 18px; }
         .form-grupo label { display: block; font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; color: var(--texto-claro); }
         .form-input, .form-select {
@@ -150,9 +146,8 @@
         }
         .form-input:focus, .form-select:focus { border-color: var(--cobre); background: rgba(255,255,255,0.05); }
 
-        /* Quick View Modal específico */
         .quick-contenido {
-            background: rgba(10, 10, 15, 0.98); border: 1px solid var(--cobre); max-width: 750px; width: 100%; padding: 50px; border-radius: 12px; position: relative;
+            background: rgba(15, 4, 6, 0.98); border: 1px solid var(--cobre); max-width: 750px; width: 100%; padding: 50px; border-radius: 12px; position: relative;
             box-shadow: 0 40px 90px rgba(0,0,0,0.95), 0 0 45px var(--cobre-brillo); display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin: auto;
         }
         .quick-info h2 { font-family: 'Oswald', sans-serif; font-size: 32px; margin: 0 0 10px 0; letter-spacing: 1px; }
@@ -161,41 +156,38 @@
         .quick-specs li { font-size: 13px; color: var(--texto-claro); margin-bottom: 6px; display: flex; justify-content: space-between; }
         .quick-specs li span { color: var(--cobre); font-weight: 700; font-family: 'Oswald', sans-serif; }
 
-        /* Hero Inmersivo */
         .hero {
             position: relative;
-            background: linear-gradient(135deg, rgba(2,2,3,0.95) 30%, rgba(2,2,3,0.6)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1920&auto=format&fit=crop') center/cover fixed;
-            padding: 320px 60px; border-bottom: 1px solid var(--borde); overflow: hidden;
+            background: linear-gradient(135deg, rgba(10,2,3,0.95) 30%, rgba(10,2,3,0.5)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1920&auto=format&fit=crop') center/cover fixed;
+            padding: 240px 60px 180px 60px; border-bottom: 1px solid var(--borde); overflow: hidden; text-align: center;
         }
-        .hero h1 { font-family: 'Oswald', sans-serif; font-size: 105px; margin: 0 0 25px 0; text-transform: uppercase; letter-spacing: 4px; line-height: 0.95; }
-        .hero p { font-size: 21px; color: var(--texto-gris); margin: 0 0 50px 0; line-height: 1.8; font-weight: 300; max-width: 700px; }
+        .hero h1 { font-family: 'Oswald', sans-serif; font-size: 90px; margin: 0 0 25px 0; text-transform: uppercase; letter-spacing: 4px; line-height: 0.95; }
+        .hero p { font-size: 20px; color: var(--texto-gris); margin: 0 auto; line-height: 1.8; font-weight: 300; max-width: 750px; }
 
-        /* Cinta Animada (Ticker) */
-        .ticker-wrap { width: 100%; overflow: hidden; background-color: var(--cobre); padding: 14px 0; box-shadow: 0 10px 30px rgba(245,158,11,0.2); }
+        .ticker-wrap { width: 100%; overflow: hidden; background-color: var(--cobre); padding: 14px 0; box-shadow: 0 10px 30px rgba(201,28,51,0.2); }
         .ticker { display: inline-block; white-space: nowrap; box-sizing: border-box; animation: ticker 35s linear infinite; }
-        .ticker-item { display: inline-block; padding: 0 50px; font-family: 'Oswald', sans-serif; font-size: 14px; color: #000; text-transform: uppercase; letter-spacing: 3.5px; font-weight: 700; }
+        .ticker-item { display: inline-block; padding: 0 50px; font-family: 'Oswald', sans-serif; font-size: 14px; color: #fff; text-transform: uppercase; letter-spacing: 3.5px; font-weight: 700; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-        /* Secciones Globales */
-        .seccion { padding: 160px 60px; max-width: 1400px; margin: 0 auto; }
-        .titulo-seccion { font-family: 'Oswald', sans-serif; font-size: 52px; margin-bottom: 60px; text-transform: uppercase; letter-spacing: 2.5px; display: flex; align-items: center; gap: 30px; }
+        .seccion { padding: 90px 60px; max-width: 1400px; margin: 0 auto; }
+        .titulo-seccion { font-family: 'Oswald', sans-serif; font-size: 42px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2.5px; display: flex; align-items: center; gap: 30px; }
         .titulo-seccion::after { content: ''; height: 1px; flex-grow: 1; background: linear-gradient(90deg, var(--borde), transparent); }
 
-        .significado-seccion { background-color: var(--bg-oscuro); padding: 180px 60px; border-bottom: 1px solid var(--borde); }
+        /* SECCIÓN SIGNIFICADO (FILOSOFÍA) */
+        .significado-seccion { background-color: var(--bg-oscuro); padding: 140px 60px; border-bottom: 1px solid var(--borde); }
         .significado-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; max-width: 1400px; margin: 0 auto; }
         .significado-texto h2 { font-family: 'Oswald', sans-serif; font-size: 58px; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 35px 0; line-height: 1.1; }
         .significado-texto h2 span { color: var(--cobre); }
         .significado-texto p { font-size: 19px; color: var(--texto-gris); line-height: 1.9; margin-bottom: 28px; font-weight: 300; }
         .significado-texto p strong { color: var(--texto-claro); font-weight: 700; }
-        
-        .significado-visual { background: linear-gradient(145deg, rgba(12,12,18,0.9), rgba(4,4,6,0.9)); border: 1px solid var(--borde); border-radius: 12px; padding: 70px; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.8); text-align: center; backdrop-filter: blur(20px); }
+        .significado-visual { background: linear-gradient(145deg, rgba(20,5,7,0.9), rgba(10,2,3,0.9)); border: 1px solid var(--borde); border-radius: 12px; padding: 70px; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.8); text-align: center; backdrop-filter: blur(20px); }
         .significado-visual::before { content: 'VÉRTICE 01 // ESPECTRO'; position: absolute; top: 25px; left: 25px; font-family: 'Oswald', sans-serif; font-size: 11px; color: var(--cobre); letter-spacing: 3px; }
         .onda-grafico { width: 100%; height: 220px; display: flex; align-items: center; justify-content: space-between; margin-top: 30px; }
         .barra-onda { width: 7px; background-color: var(--cobre); border-radius: 4px; transition: height 0.4s; }
         .explicacion-onda { margin-top: 40px; font-size: 15px; color: var(--texto-gris); font-style: italic; }
 
-        /* Fábrica Estilo Industrial */
-        .fabrica-seccion { background-color: var(--bg-panel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 180px 60px; }
+        /* SECCIÓN FÁBRICA */
+        .fabrica-seccion { background-color: var(--bg-panel); border-bottom: 1px solid var(--borde); padding: 140px 60px; }
         .fabrica-intro { max-width: 900px; margin: 0 auto 90px auto; text-align: center; }
         .fabrica-intro h2 { font-family: 'Oswald', sans-serif; font-size: 60px; text-transform: uppercase; letter-spacing: 2.5px; margin: 0 0 25px 0; }
         .fabrica-intro h2 span { color: var(--cobre); }
@@ -203,115 +195,124 @@
         .fabrica-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 50px; max-width: 1400px; margin: 0 auto; }
         .fabrica-card { background: var(--bg-card); border: 1px solid var(--borde); padding: 60px 45px; position: relative; border-radius: 10px; backdrop-filter: blur(20px); transition: all 0.4s; }
         .fabrica-card:hover { border-color: var(--borde-hover); box-shadow: 0 30px 60px rgba(0,0,0,0.8); transform: translateY(-5px); }
-        .fabrica-numero { font-family: 'Oswald', sans-serif; font-size: 64px; color: rgba(245, 158, 11, 0.12); font-weight: 700; position: absolute; top: 25px; right: 35px; }
+        .fabrica-numero { font-family: 'Oswald', sans-serif; font-size: 64px; color: rgba(201, 28, 51, 0.12); font-weight: 700; position: absolute; top: 25px; right: 35px; }
         .fabrica-card h4 { font-family: 'Oswald', sans-serif; font-size: 28px; margin: 0 0 18px 0; color: #fff; letter-spacing: 1px; }
         .fabrica-card p { margin: 0 0 35px 0; font-size: 16px; color: var(--texto-gris); line-height: 1.8; }
         .fabrica-specs-tecnicas { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--borde); padding-top: 22px; }
         .fabrica-specs-tecnicas li { font-size: 13px; color: var(--texto-claro); padding: 10px 0; display: flex; justify-content: space-between; font-family: 'Manrope', sans-serif; letter-spacing: 0.5px; }
         .fabrica-specs-tecnicas li span { color: var(--cobre); font-weight: 700; font-family: 'Oswald', sans-serif; }
 
-        /* Custom Shop - Dashboard Profesional */
-        .custom-shop-seccion { background-color: var(--bg-panel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 160px 60px; }
-        .custom-container { max-width: 1100px; margin: 0 auto; background: rgba(10, 10, 15, 0.85); border: 1px solid var(--borde); border-radius: 12px; padding: 60px; box-shadow: 0 40px 90px rgba(0,0,0,0.9); backdrop-filter: blur(25px); }
+        /* CUSTOM SHOP */
+        .custom-shop-seccion { background-color: var(--bg-oscuro); border-bottom: 1px solid var(--borde); padding: 140px 60px; }
+        .custom-container { max-width: 1100px; margin: 0 auto; background: rgba(20, 5, 8, 0.85); border: 1px solid var(--borde); border-radius: 12px; padding: 60px; box-shadow: 0 40px 90px rgba(0,0,0,0.9); backdrop-filter: blur(25px); }
         .custom-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; }
         .custom-opciones h4 { font-family: 'Oswald', sans-serif; font-size: 16px; text-transform: uppercase; margin: 0 0 12px 0; letter-spacing: 1.5px; color: var(--texto-claro); }
         .custom-opciones select, .custom-opciones input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--borde); padding: 14px 18px; color: #fff; font-family: 'Manrope', sans-serif; font-size: 15px; border-radius: 6px; margin-bottom: 28px; outline: none; transition: border-color 0.3s; }
         .custom-opciones select:focus, .custom-opciones input:focus { border-color: var(--cobre); background: rgba(255,255,255,0.05); }
-        
-        .custom-resumen { background: rgba(3, 3, 5, 0.6); border: 1px solid var(--borde); padding: 40px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
+        .custom-resumen { background: rgba(10, 2, 4, 0.6); border: 1px solid var(--borde); padding: 40px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; }
         .custom-resumen h3 { font-family: 'Oswald', sans-serif; font-size: 26px; text-transform: uppercase; margin: 0 0 25px 0; letter-spacing: 1.5px; border-bottom: 1px solid var(--borde); padding-bottom: 18px; }
         .custom-resumen-detalles p { font-size: 14px; color: var(--texto-gris); margin: 12px 0; display: flex; justify-content: space-between; }
         .custom-resumen-detalles p span { color: #fff; font-weight: 600; font-family: 'Manrope', sans-serif; }
         .custom-precio-total { font-family: 'Oswald', sans-serif; font-size: 38px; color: var(--cobre); margin: 25px 0; letter-spacing: 1px; }
 
-        /* Catálogo Moderno con Tarjetas Glass y Estrellas */
         .buscador-contenedor { max-width: 700px; margin: 0 auto 40px auto; position: relative; }
         .buscador-input {
-            width: 100%; background: var(--bg-panel); border: 1px solid var(--borde); padding: 20px 35px;
-            color: var(--texto-claro); font-family: 'Manrope', sans-serif; font-size: 16px; outline: none; border-radius: 8px; box-sizing: border-box;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); transition: border-color 0.3s, box-shadow 0.3s;
+            width: 100%; background: var(--bg-panel); border: 1px solid var(--borde); padding: 18px 30px;
+            color: var(--texto-claro); font-family: 'Manrope', sans-serif; font-size: 15px; outline: none; border-radius: 8px; box-sizing: border-box;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); transition: border-color 0.3s;
         }
-        .buscador-input:focus { border-color: var(--cobre); box-shadow: 0 0 25px var(--cobre-brillo), inset 0 2px 5px rgba(0,0,0,0.5); }
+        .buscador-input:focus { border-color: var(--cobre); box-shadow: 0 0 25px var(--cobre-brillo); }
 
-        .filtros-catalogo { display: flex; gap: 12px; margin-bottom: 70px; flex-wrap: wrap; justify-content: center; }
+        .filtros-catalogo { display: flex; gap: 10px; margin-bottom: 50px; flex-wrap: wrap; justify-content: center; }
         .filtro-btn {
-            background-color: rgba(255,255,255,0.02); color: var(--texto-gris); border: 1px solid var(--borde); padding: 12px 22px;
+            background-color: rgba(255,255,255,0.02); color: var(--texto-gris); border: 1px solid var(--borde); padding: 10px 18px;
             font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 6px;
         }
-        .filtro-btn:hover, .filtro-btn.activo { background-color: var(--cobre); color: #000; border-color: var(--cobre); font-weight: 700; box-shadow: 0 0 25px var(--cobre-brillo); }
+        .filtro-btn:hover, .filtro-btn.activo { background-color: var(--cobre); color: #fff; border-color: var(--cobre); font-weight: 700; box-shadow: 0 0 25px var(--cobre-brillo); }
 
-        .grid-productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 50px; }
-        .producto-card { background: var(--bg-card); border: 1px solid var(--borde); position: relative; overflow: hidden; border-radius: 10px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(20px); }
-        .producto-card:hover { border-color: var(--borde-hover); box-shadow: 0 35px 70px rgba(0,0,0,0.9), 0 0 30px var(--cobre-brillo); transform: translateY(-8px); }
-        .img-contenedor { width: 100%; height: 300px; background: linear-gradient(135deg, #040406, #0a0a10); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--borde); position: relative; cursor: pointer; }
-        .svg-instrumento { width: 50%; height: 50%; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); transition: transform 0.5s; }
-        .producto-card:hover .svg-instrumento { transform: scale(1.08); }
+        .grid-productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
+        .producto-card { background: var(--bg-card); border: 1px solid var(--borde); position: relative; overflow: hidden; border-radius: 10px; transition: all 0.4s ease; backdrop-filter: blur(20px); }
+        .producto-card:hover { border-color: var(--borde-hover); box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 25px var(--cobre-brillo); transform: translateY(-6px); }
         
-        .valoracion-estrellas { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 12px; color: var(--cobre); }
-        .valoracion-estrellas span { color: var(--texto-gris); font-size: 11px; margin-left: 4px; }
+        /* ESTILOS PARA LAS NUEVAS SILUETAS */
+        .img-contenedor { width: 100%; height: 200px; background: linear-gradient(135deg, #0a0203, #1a0507); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--borde); cursor: pointer; }
+        .svg-instrumento { width: 35%; height: 35%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8)); transition: transform 0.4s; }
+        .producto-card:hover .svg-instrumento { transform: scale(1.15); }
 
-        .producto-info { padding: 35px; }
-        .etiqueta { color: var(--cobre); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px; display: block; margin-bottom: 8px; }
-        .producto-info h4 { margin: 0 0 8px 0; font-family: 'Oswald', sans-serif; font-size: 24px; letter-spacing: 0.5px; cursor: pointer; transition: color 0.3s; }
-        .producto-info h4:hover { color: var(--cobre); }
-        .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid var(--borde); padding-top: 18px; }
-        .precio { font-weight: 300; font-size: 26px; color: var(--texto-claro); font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+        .producto-info { padding: 25px; }
+        .producto-info h4 { margin: 0 0 10px 0; font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 0.5px; line-height: 1.3; }
+        .producto-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; border-top: 1px solid var(--borde); padding-top: 15px; }
+        .precio { font-weight: 300; font-size: 24px; color: var(--texto-claro); font-family: 'Oswald', sans-serif; }
         
         .btn-comprar-item {
-            background-color: var(--cobre); color: #000; border: none; padding: 10px 20px;
-            font-family: 'Oswald', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; cursor: pointer; border-radius: 4px; transition: all 0.3s;
+            background-color: var(--cobre); color: #fff; border: none; padding: 8px 16px;
+            font-family: 'Oswald', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; cursor: pointer; border-radius: 4px; transition: all 0.3s;
         }
-        .btn-comprar-item:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        .btn-comprar-item:hover { background-color: #fff; color: #000; }
 
-        /* Asistencia Técnica y Testimonios */
-        .soporte-seccion { background-color: var(--bg-panel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 160px 60px; }
+        /* TESTIMONIOS Y SOPORTE */
+        .soporte-seccion { background-color: var(--bg-panel); border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 140px 60px; }
         .soporte-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
         .soporte-item { background: var(--bg-card); border: 1px solid var(--borde); padding: 40px; border-radius: 8px; backdrop-filter: blur(20px); }
         .soporte-pregunta { font-family: 'Oswald', sans-serif; font-size: 24px; margin: 0 0 12px 0; color: #fff; letter-spacing: 0.5px; }
         .soporte-respuesta { font-size: 16px; color: var(--texto-gris); line-height: 1.8; margin: 0; font-weight: 300; }
 
-        .testimonios { background-color: var(--bg-oscuro); padding: 160px 60px; text-align: center; }
+        .testimonios { background-color: var(--bg-oscuro); padding: 140px 60px; text-align: center; border-bottom: 1px solid var(--borde); }
         .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 50px; max-width: 1400px; margin: 70px auto 0 auto; }
         .testimonio-card { background: var(--bg-card); border: 1px solid var(--borde); padding: 50px; text-align: left; border-radius: 10px; backdrop-filter: blur(20px); }
         .testimonio-card p { font-size: 17px; color: var(--texto-claro); line-height: 1.8; font-style: italic; margin: 0 0 30px 0; font-weight: 300; }
         .testimonio-autor { font-family: 'Oswald', sans-serif; font-size: 18px; text-transform: uppercase; color: var(--texto-claro); letter-spacing: 1px; }
         .testimonio-autor span { display: block; font-family: 'Manrope', sans-serif; font-size: 13px; color: var(--cobre); font-weight: 400; margin-top: 4px; }
 
-        /* Botón WhatsApp Flotante Premium */
         .whatsapp-flotante {
-            position: fixed; bottom: 40px; right: 40px; background-color: #25D366; color: white; width: 75px; height: 75px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; text-decoration: none; box-shadow: 0px 10px 40px rgba(37, 211, 102, 0.5); z-index: 2500;
-            transition: transform 0.3s;
+            position: fixed; bottom: 40px; right: 40px; background-color: #25D366; color: white; width: 65px; height: 65px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; text-decoration: none; box-shadow: 0px 10px 30px rgba(37, 211, 102, 0.5); z-index: 2500;
         }
-        .whatsapp-flotante:hover { transform: scale(1.1); }
-        .whatsapp-flotante svg { width: 40px; height: 40px; fill: white; }
+        .whatsapp-flotante svg { width: 34px; height: 34px; fill: white; }
 
-        /* Footer Exclusivo */
-        .footer { background-color: var(--bg-oscuro); padding: 120px 60px 60px 60px; border-top: 1px solid var(--borde); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 70px; max-width: 1400px; margin: 0 auto; border-bottom: 1px solid var(--borde); padding-bottom: 80px; }
-        .footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 19px; margin: 0 0 30px 0; text-transform: uppercase; color: var(--texto-claro); letter-spacing: 1.5px; }
-        .footer-col p, .footer-col a { color: var(--texto-gris); font-size: 15px; margin: 0 0 18px 0; display: block; text-decoration: none; transition: color 0.3s; font-weight: 300; }
-        .footer-col a:hover { color: var(--cobre); }
-        .copyright { text-align: center; color: #555; font-size: 13px; margin-top: 60px; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
+        .footer { background-color: var(--bg-oscuro); padding: 80px 60px 40px 60px; text-align: center; }
+        .copyright { color: #666; font-size: 13px; font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
 
-        @media print {
-            body { background: #fff !important; color: #000 !important; }
-            .navbar, .footer, .whatsapp-flotante, .btn-checkout, span[onclick], button { display: none !important; }
-            .modal-contenido { border: none !important; box-shadow: none !important; color: #000 !important; }
-        }
-
+        /* RESPONSIVE CELULARES */
         @media (max-width: 768px) {
-            .navbar { padding: 18px 20px; } .navbar .menu { display: none; }
-            .hero { padding: 180px 20px; } .hero h1 { font-size: 52px; }
-            .seccion, .fabrica-seccion, .significado-seccion, .soporte-seccion, .testimonios, .custom-shop-seccion { padding: 90px 20px; }
-            #carritoDrawer { width: 100%; right: -100%; }
-            .custom-grid, .quick-contenido { grid-template-columns: 1fr; }
+            .navbar { padding: 15px 20px; flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .navbar .logo { font-size: 26px; width: 100%; text-align: center; }
+            .navbar .menu { display: flex; width: 100%; justify-content: center; gap: 10px; }
+            .navbar .menu a { display: none; }
+            .selector-moneda, .btn-custom { font-size: 12px; padding: 8px 15px; }
+
+            .hero { padding: 140px 20px 100px 20px; } 
+            .hero h1 { font-size: 42px; letter-spacing: 2px; }
+            .hero p { font-size: 16px; }
+
+            .seccion, .significado-seccion, .fabrica-seccion, .custom-shop-seccion, .testimonios, .soporte-seccion { padding: 60px 20px; }
+            .titulo-seccion, .fabrica-intro h2, .significado-texto h2 { font-size: 32px; flex-direction: column; text-align: center; gap: 15px; }
+            .titulo-seccion::after { display: none; }
+
+            .significado-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .custom-grid { grid-template-columns: 1fr; gap: 30px; }
+
+            .buscador-input { padding: 15px 20px; font-size: 14px; }
+            .filtros-catalogo { gap: 8px; }
+            .filtro-btn { padding: 10px; font-size: 11px; flex-grow: 1; text-align: center; }
+
+            .grid-productos { grid-template-columns: 1fr; gap: 25px; }
+            .img-contenedor { height: 220px; }
+
+            #carritoDrawer { width: 100%; right: -100%; padding: 20px; }
+            .carrito-item-info h5 { font-size: 14px; line-height: 1.2; }
+
+            .modal-contenido, .quick-contenido { padding: 30px 20px; margin: 15px auto; width: 92%; }
+            .quick-info h2 { font-size: 24px; margin-top: 15px; }
+            .quick-info p { font-size: 14px; }
+            .precio { font-size: 22px; }
+            .form-grupo { margin-bottom: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="toastNotificacion">¡Instrumento agregado al carrito!</div>
+    <div id="toastNotificacion">¡Agregado al carrito!</div>
     <div class="cursor-luz" id="cursorLuz"></div>
 
     <div id="preloader">
@@ -319,56 +320,53 @@
         <div class="loader-line"></div>
     </div>
 
-    <!-- MODAL VISTA RÁPIDA (QUICK VIEW) -->
+    <!-- MODALES -->
     <div id="modalQuickView" class="modal-overlay">
         <div class="quick-contenido">
             <span onclick="cerrarQuickView()" style="position: absolute; top: 20px; right: 25px; font-family: 'Oswald'; font-size: 22px; cursor: pointer; color: var(--texto-gris);">✕</span>
-            <div id="quickImgContainer" style="background:#040406; height:250px; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid var(--borde);">
-                <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:60%; height:60%;"><path d="M12 2v20M9 4l6 2"></path></svg>
+            <div id="quickImgContainer" style="background:#0a0203; height:250px; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid var(--borde);">
+                <svg id="quickViewIcon" class="svg-instrumento" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:60%; height:60%;"></svg>
             </div>
             <div class="quick-info">
-                <span id="quickEtiqueta" class="etiqueta">Categoría</span>
-                <h2 id="quickTitulo">Nombre</h2>
-                <p id="quickDesc">Descripción detallada del instrumento.</p>
+                <span id="quickEtiqueta" style="color: var(--cobre); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px; display: block; margin-bottom: 8px;">Categoría</span>
+                <h2 id="quickTitulo" style="margin-top: 0;">Nombre</h2>
+                <p id="quickDesc">Descripción detallada del artículo.</p>
                 <ul class="quick-specs" id="quickSpecsList"></ul>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div id="quickPrecio" class="precio">$0</div>
+                    <div id="quickPrecio" class="precio" style="margin: 0;">$0</div>
                     <button class="btn-comprar-item" id="quickBtnAgregar">Añadir al Carrito</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL MIS PEDIDOS / ÓRDENES -->
     <div id="modalMisOrdenes" class="modal-overlay">
         <div class="modal-contenido">
             <span onclick="cerrarMisOrdenes()" style="position: absolute; top: 25px; right: 30px; font-family: 'Oswald'; font-size: 22px; cursor: pointer; color: var(--texto-gris);">✕</span>
             <h3>Historial de Órdenes</h3>
-            <p class="sub-check">Seguimiento en tiempo real de tus instrumentos adscritos a fabricación Vértice.</p>
+            <p class="sub-check">Seguimiento de pedidos registrados en este equipo.</p>
             <div id="listaMisOrdenes" style="max-height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
-                <p style="color: var(--texto-gris); text-align: center;">No hay órdenes registradas en este equipo.</p>
+                <p style="color: var(--texto-gris); text-align: center;">No hay órdenes registradas.</p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL FACTURA DIGITAL -->
     <div id="modalFactura" class="modal-overlay">
         <div class="modal-contenido" style="border-color: var(--cobre);">
             <span onclick="cerrarFactura()" style="position: absolute; top: 25px; right: 30px; font-family: 'Oswald'; font-size: 22px; cursor: pointer; color: var(--texto-gris);">✕</span>
-            <div style="text-align: center; border-bottom: 1px solid var(--borde); padding-bottom: 20px; margin-bottom: 20px;">
-                <div style="font-family: 'Oswald'; font-size: 28px; letter-spacing: 4px;">VÉRTICE<span>.</span></div>
-                <p style="font-size: 12px; color: var(--texto-gris); margin: 5px 0 0 0;">Comprobante Oficial de Transacción y Garantía</p>
+            <div style="text-align: center; border-bottom: 1px solid var(--borde); padding-bottom: 15px; margin-bottom: 20px;">
+                <div style="font-family: 'Oswald'; font-size: 26px; letter-spacing: 4px;">VÉRTICE<span>.</span></div>
+                <p style="font-size: 12px; color: var(--texto-gris); margin: 5px 0 0 0;">Comprobante de Compra Oficial</p>
             </div>
-            <div id="facturaContenidoDetalle" style="font-size: 14px; line-height: 1.6; color: var(--texto-claro);">
-                <!-- Detalle dinámico de la factura -->
-            </div>
+            <div id="facturaContenidoDetalle" style="font-size: 14px; line-height: 1.6;"></div>
             <div style="display: flex; gap: 15px; margin-top: 25px;">
-                <button class="btn-checkout" onclick="window.print()" style="background: transparent; border: 1px solid var(--cobre); color: var(--cobre);">Imprimir / Guardar PDF</button>
-                <button class="btn-checkout" onclick="cerrarFactura()">Cerrar Recibo</button>
+                <button class="btn-checkout" onclick="window.print()" style="background: transparent; border: 1px solid var(--cobre); color: var(--cobre);">Imprimir</button>
+                <button class="btn-checkout" onclick="cerrarFactura()">Cerrar</button>
             </div>
         </div>
     </div>
 
+    <!-- CARRITO LATERAL -->
     <div id="carritoDrawer">
         <div class="carrito-header">
             <h3>Tu Carrito</h3>
@@ -388,95 +386,78 @@
 
     <div id="modalCheckout" class="modal-overlay">
         <div class="modal-contenido">
-            <span class="modal-cerrar" onclick="cerrarCheckout()" style="position: absolute; top: 25px; right: 30px; font-family: 'Oswald'; font-size: 22px; cursor: pointer; color: var(--texto-gris);">✕</span>
+            <span onclick="cerrarCheckout()" style="position: absolute; top: 25px; right: 30px; font-family: 'Oswald'; font-size: 22px; cursor: pointer; color: var(--texto-gris);">✕</span>
             <h3>Pasarela Segura Vértice</h3>
-            <p class="sub-check">Ingresa tus datos y selecciona método de envío internacional certificado.</p>
+            <p class="sub-check">Ingresa tus datos para procesar la orden.</p>
             
             <div class="form-grupo">
-                <label>Nombre del Titular</label>
+                <label>Nombre Completo</label>
                 <input type="text" id="pagoNombre" class="form-input" placeholder="Ej. Carlos Mendoza">
-            </div>
-            <div class="form-grupo">
-                <label>Método de Envío y Logística</label>
-                <select id="pagoEnvio" class="form-select" onchange="actualizarTotalCheckout()">
-                    <option value="0">Retiro Directo en Taller de Fábrica ($0) - Inmediato</option>
-                    <option value="85">Envío Aéreo Estándar Protegido (+$85) [3 a 5 días]</option>
-                    <option value="195">Encomienda Orquestal de Alta Seguridad (+$195) [24-48 horas]</option>
-                </select>
             </div>
             <div class="form-grupo">
                 <label>Número de Tarjeta</label>
                 <input type="text" id="pagoTarjeta" class="form-input" placeholder="4532 •••• •••• 8920">
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div class="form-grupo">
-                    <label>Expiración (MM/AA)</label>
-                    <input type="text" id="pagoExp" class="form-input" placeholder="08/28">
-                </div>
-                <div class="form-grupo">
-                    <label>CVV / CVC</label>
-                    <input type="password" id="pagoCvv" class="form-input" placeholder="•••">
-                </div>
-            </div>
             <div class="form-grupo">
-                <label>Dirección de Entrega</label>
-                <input type="text" id="pagoDir" class="form-input" placeholder="Ciudad, Código Postal, Dirección">
+                <label>Dirección de Envío</label>
+                <input type="text" id="pagoDir" class="form-input" placeholder="Ciudad, Dirección completa">
             </div>
 
-            <div style="font-family:'Oswald'; font-size:18px; margin:15px 0; display:flex; justify-content:space-between;">
-                <span>Total Final con Envío:</span>
+            <div style="font-family:'Oswald'; font-size:18px; margin:20px 0 10px 0; display:flex; justify-content:space-between;">
+                <span>Total Final:</span>
                 <span id="checkoutTotalFinal" style="color:var(--cobre);">$0</span>
             </div>
 
-            <button class="btn-checkout" id="btnProcesarPago" onclick="procesarPagoExitoso()">Procesar Pago Seguro</button>
+            <button class="btn-checkout" id="btnProcesarPago" onclick="procesarPagoExitoso()">Completar Pedido</button>
         </div>
     </div>
 
+    <!-- NAVEGACIÓN -->
     <nav class="navbar">
         <a href="#" class="logo">VÉRTICE<span>.</span></a>
         <div class="menu">
-            <a href="#filosofia">El Significado</a>
-            <a href="#taller">La Fábrica</a>
+            <a href="#filosofia">Filosofía</a>
+            <a href="#instrumentos">Catálogo</a>
             <a href="#custom">Custom Shop</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="#testimonios">Artistas</a>
-            <a href="#soporte">Asistencia Técnica</a>
+            <a href="#testimonios">Comunidad</a>
             <a href="javascript:void(0)" onclick="abrirMisOrdenes()" style="color: var(--cobre);">Mis Órdenes</a>
             <select class="selector-moneda" id="selectorMoneda" onchange="cambiarMoneda()">
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
             </select>
-            <button class="btn-custom" onclick="toggleCarrito()">Mi Carrito (<span id="contadorCarrito">0</span>)</button>
+            <button class="btn-custom" onclick="toggleCarrito()">Carrito (<span id="contadorCarrito">0</span>)</button>
         </div>
     </nav>
 
+    <!-- PORTADA NUEVA (HERO) -->
     <header class="hero">
         <div class="revelar activo">
-            <h1>Ingeniería para el<br><span style="color: var(--cobre);">Músico Moderno</span></h1>
-            <p>Fabricación simétrica de instrumentos sinfónicos, acústicos y de alta tensión. Diseñados para ofrecer proyección absoluta en el estudio y el escenario.</p>
+            <h1>Precisión Acústica<br><span style="color: var(--cobre);">Sin Concesiones</span></h1>
+            <p>Diseño simétrico, materiales de vanguardia y repuestos esenciales de alta gama. Equipamiento forjado para resistir la máxima exigencia del estudio y el rigor del escenario.</p>
         </div>
     </header>
 
     <div class="ticker-wrap">
         <div class="ticker">
-            <div class="ticker-item">✦ MADERAS CON CURADO ACÚSTICO</div>
+            <div class="ticker-item">✦ RESINAS DE ALTA DENSIDAD</div>
             <div class="ticker-item">✦ TORNEADO CNC DE PRECISIÓN</div>
-            <div class="ticker-item">✦ ALEACIONES DE ALTA TENSIÓN</div>
-            <div class="ticker-item">✦ ENSAMBLAJE MANUAL LUTHERS</div>
+            <div class="ticker-item">✦ ALEACIONES EXTREMAS</div>
+            <div class="ticker-item">✦ ENSAMBLAJE PROFESIONAL</div>
             <div class="ticker-item">✦ AFINACIÓN POR ESPECTRO</div>
         </div>
     </div>
 
+    <!-- HISTORIA DE VÉRTICE -->
     <section class="significado-seccion" id="filosofia">
         <div class="significado-grid">
             <div class="significado-texto revelar">
-                <span class="etiqueta">Nuestra Esencia</span>
+                <span style="color: var(--cobre); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px; display: block; margin-bottom: 8px;">Nuestra Esencia</span>
                 <h2>¿Por qué <span>Vértice</span>?</h2>
                 <p>En geometría y física, un <strong>vértice</strong> es el punto exacto donde convergen dos líneas, el punto de máxima altura o la cúspide de una estructura. En nuestra filosofía de fabricación, ese punto representa el instante preciso en el que la materia prima y la ingeniería de alta precisión se cruzan para dar vida al sonido perfecto.</p>
-                <p>Un instrumento musical no es solo un objeto de madera o metal; es un sistema físico sometido a tensiones extremas. En Vértice entendemos que la excelencia musical vive en los detalles técnicos: la densidad milimétrica de una madera estacionada, la aleación exacta de un pistón o la tensión uniforme de un aro metálico. <strong>Allí, en la cumbre del diseño acústico, es donde nace Vértice.</strong></p>
+                <p>Un instrumento musical no es solo un objeto; es un sistema físico sometido a tensiones extremas. En Vértice entendemos que la excelencia musical vive en los detalles técnicos: la densidad milimétrica de un polímero, la aleación exacta de un pistón o la tensión uniforme de una cuerda. <strong>Allí, en la cumbre del diseño acústico, es donde nace Vértice.</strong></p>
             </div>
             <div class="significado-visual revelar" style="transition-delay: 0.2s;">
-                <div style="font-family: 'Oswald', sans-serif; font-size: 16px; color: #fff; margin-bottom: 10px; letter-spacing: 2px;">LA FISICA DE LA ONDA ACÚSTICA</div>
+                <div style="font-family: 'Oswald', sans-serif; font-size: 16px; color: #fff; margin-bottom: 10px; letter-spacing: 2px;">LA FÍSICA DE LA ONDA ACÚSTICA</div>
                 <div class="onda-grafico">
                     <div class="barra-onda" style="height: 30%;"></div>
                     <div class="barra-onda" style="height: 60%;"></div>
@@ -491,83 +472,81 @@
         </div>
     </section>
 
-    <section class="fabrica-seccion" id="taller">
+    <!-- SECCIÓN DE LA FÁBRICA -->
+    <section class="fabrica-seccion">
         <div class="fabrica-intro revelar">
-            <span class="etiqueta">Proceso de Manufactura</span>
+            <span style="color: var(--cobre); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px; display: block; margin-bottom: 8px;">Proceso de Manufactura</span>
             <h2>Dentro de la <span>Fábrica Vértice</span></h2>
-            <p>Cada instrumento que construimos sigue un protocolo estricto de ingeniería industrial combinado con la maestría artesanal de la luthería clásica.</p>
+            <p>Cada instrumento y repuesto que distribuimos pasa por un protocolo estricto de ingeniería de materiales y validación acústica.</p>
         </div>
         <div class="fabrica-grid">
             <div class="fabrica-card revelar">
                 <div class="fabrica-numero">01</div>
-                <h4>Laboratorio de Maderas</h4>
-                <p>Seleccionamos maderas nobles que pasan por procesos de estacionamiento natural durante más de una década.</p>
-                <ul class="fabrica-specs-tecnicas"><li>Humedad controlada <span>4.5%</span></li></ul>
+                <h4>Laboratorio de Materiales</h4>
+                <p>Seleccionamos resinas de alto impacto y aleaciones metálicas diseñadas para soportar la fricción y el cambio climático constante.</p>
+                <ul class="fabrica-specs-tecnicas"><li>Resistencia estructural <span>Máxima</span></li></ul>
             </div>
             <div class="fabrica-card revelar" style="transition-delay: 0.1s;">
                 <div class="fabrica-numero">02</div>
-                <h4>Torneado CNC y Fundición</h4>
-                <p>Herrajes, llaves y pistones de aleación monel fabricados mediante fresado CNC de alta precisión.</p>
+                <h4>Torneado CNC y Precisión</h4>
+                <p>Herrajes, boquillas y pistones fabricados mediante fresado digital de alta precisión para un sellado absoluto del aire.</p>
                 <ul class="fabrica-specs-tecnicas"><li>Tolerancia mecánica <span>± 0.02 mm</span></li></ul>
             </div>
             <div class="fabrica-card revelar" style="transition-delay: 0.2s;">
                 <div class="fabrica-numero">03</div>
                 <h4>Cámara Anecoica y Ajuste</h4>
-                <p>Pruebas acústicas aisladas donde luthier maestros calibran a mano la entonación final.</p>
+                <p>Pruebas acústicas aisladas para validar la entonación y garantizar que la respuesta de armónicos sea impecable.</p>
                 <ul class="fabrica-specs-tecnicas"><li>Pruebas de espectro <span>440Hz / 442Hz</span></li></ul>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN CUSTOM SHOP INTERACTIVA -->
+    <!-- CUSTOM SHOP -->
     <section class="custom-shop-seccion" id="custom">
         <div class="fabrica-intro revelar">
-            <span class="etiqueta">Hecho a Medida</span>
+            <span style="color: var(--cobre); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3.5px; display: block; margin-bottom: 8px;">Hecho a Medida</span>
             <h2>Configurador <span>Custom Shop</span></h2>
-            <p>Diseña tu propio instrumento seleccionando especificaciones profesionales y cotiza al instante.</p>
+            <p>Personaliza los acabados visuales de tus instrumentos y accesorios para que destaquen en el escenario.</p>
         </div>
         <div class="custom-container revelar">
             <div class="custom-grid">
                 <div class="custom-opciones">
-                    <h4>Tipo de Instrumento</h4>
+                    <h4>Instrumento Base</h4>
                     <select id="customTipo" onchange="actualizarCustom()">
-                        <option value="Guitarra Eléctrica Custom" data-base="1200">Guitarra Eléctrica Custom ($1,200)</option>
-                        <option value="Violín Maestro Artesanal" data-base="1500">Violín Maestro Artesanal ($1,500)</option>
-                        <option value="Trompeta Pro Series" data-base="950">Trompeta Pro Series ($950)</option>
-                        <option value="Violonchelo Concert" data-base="3100">Violonchelo Concert ($3,100)</option>
+                        <option value="Trompeta de Plástico Custom" data-base="130">Trompeta de Plástico Custom ($130)</option>
+                        <option value="Trombón de Plástico Custom" data-base="150">Trombón de Plástico Custom ($150)</option>
+                        <option value="Cello Compuesto 4/4" data-base="1500">Cello Compuesto 4/4 ($1,500)</option>
                     </select>
 
-                    <h4>Madera / Cuerpo</h4>
+                    <h4>Color del Material</h4>
                     <select id="customMadera" onchange="actualizarCustom()">
-                        <option value="Arce Flameado Estacionado" data-extra="200">Arce Flameado Estacionado (+$200)</option>
-                        <option value="Cedro Canadiense" data-extra="100">Cedro Canadiense (+$100)</option>
-                        <option value="Abeto Maestro Alemán" data-extra="350">Abeto Maestro Alemán (+$350)</option>
-                        <option value="Granadilla Africana" data-extra="400">Granadilla Africana (+$400)</option>
+                        <option value="Rojo Vinotinto Profundo" data-extra="0">Rojo Vinotinto Profundo (Incluido)</option>
+                        <option value="Negro Carbón Mate" data-extra="0">Negro Carbón Mate (Incluido)</option>
+                        <option value="Dorado Anodizado" data-extra="50">Dorado Anodizado (+$50)</option>
                     </select>
 
-                    <h4>Acabado de Herrajes</h4>
+                    <h4>Estuche Rígido</h4>
                     <select id="customHerrajes" onchange="actualizarCustom()">
-                        <option value="Cobre Pulido Vértice" data-extra="0">Cobre Pulido Vértice (Incluido)</option>
-                        <option value="Oro 24k Electroplateado" data-extra="300">Oro 24k Electroplateado (+$300)</option>
-                        <option value="Níquel Negro Mate" data-extra="150">Níquel Negro Mate (+$150)</option>
+                        <option value="Funda de Tela Estándar" data-extra="0">Funda de Tela Estándar (Incluido)</option>
+                        <option value="Estuche Rígido Fibra" data-extra="85">Estuche Rígido de Fibra (+$85)</option>
                     </select>
 
-                    <h4>Grabado Personalizado (Opcional)</h4>
-                    <input type="text" id="customTexto" placeholder="Ej. Tu Nombre o Nombre de Banda" onkeyup="actualizarCustom()">
+                    <h4>Etiqueta Personalizada (Opcional)</h4>
+                    <input type="text" id="customTexto" placeholder="Ej. Tu Nombre o Iniciales" onkeyup="actualizarCustom()">
                 </div>
 
                 <div class="custom-resumen">
                     <div>
                         <h3>Resumen Custom</h3>
                         <div class="custom-resumen-detalles">
-                            <p>Base: <span id="resItem">Guitarra Eléctrica Custom</span></p>
-                            <p>Madera: <span id="resMadera">Arce Flameado Estacionado</span></p>
-                            <p>Herrajes: <span id="resHerrajes">Cobre Pulido Vértice</span></p>
+                            <p>Base: <span id="resItem">Trompeta de Plástico Custom</span></p>
+                            <p>Color: <span id="resMadera">Rojo Vinotinto Profundo</span></p>
+                            <p>Estuche: <span id="resHerrajes">Funda de Tela Estándar</span></p>
                             <p>Grabado: <span id="resTexto">Ninguno</span></p>
                         </div>
                     </div>
                     <div>
-                        <div class="custom-precio-total" id="resPrecio">$1,400</div>
+                        <div class="custom-precio-total" id="resPrecio">$130</div>
                         <button class="btn-checkout" onclick="agregarCustomAlCarrito()">Añadir Custom al Carrito</button>
                     </div>
                 </div>
@@ -575,300 +554,159 @@
         </div>
     </section>
 
-    <section class="seccion" id="catalogo">
-        <h2 class="titulo-seccion revelar">Catálogo General</h2>
-        
-        <div class="buscador-contenedor revelar">
-            <input type="text" id="inputBuscador" class="buscador-input" placeholder="Buscar instrumento por nombre o tipo..." onkeyup="buscarInstrumento()">
+    <!-- BUSCADOR GLOBAL -->
+    <div style="max-width: 1400px; margin: 60px auto 0 auto; padding: 0 60px;">
+        <div class="buscador-contenedor">
+            <input type="text" id="inputBuscador" class="buscador-input" placeholder="Buscar en el catálogo (ej. Trompeta, Cuerdas)..." onkeyup="buscarGlobal()">
         </div>
+    </div>
 
-        <div class="filtros-catalogo revelar">
-            <button class="filtro-btn activo" onclick="filtrarInstrumentos('todos')">Todos</button>
-            <button class="filtro-btn" onclick="filtrarInstrumentos('guitarras')">Guitarras y Pulsadas</button>
-            <button class="filtro-btn" onclick="filtrarInstrumentos('cuerdas')">Cuerdas Frotadas</button>
-            <button class="filtro-btn" onclick="filtrarInstrumentos('metales')">Viento Metal</button>
-            <button class="filtro-btn" onclick="filtrarInstrumentos('maderas')">Viento Madera</button>
-            <!-- Filtros por Rango de Precio -->
-            <button class="filtro-btn" onclick="filtrarPorPrecio('bajo')">Menos de $1,000</button>
-            <button class="filtro-btn" onclick="filtrarPorPrecio('medio')">$1,000 - $2,500</button>
-            <button class="filtro-btn" onclick="filtrarPorPrecio('alto')">Alta Gama (+$2,500)</button>
+    <!-- SECCIÓN 1: INSTRUMENTOS -->
+    <section class="seccion" id="instrumentos" style="padding-top: 20px;">
+        <h2 class="titulo-seccion">Catálogo de Instrumentos</h2>
+        <div class="filtros-catalogo" id="filtros-inst">
+            <button class="filtro-btn activo" onclick="filtrarFamilia('todos', this)">Todos</button>
+            <button class="filtro-btn" onclick="filtrarFamilia('metales', this)">Viento Metal</button>
+            <button class="filtro-btn" onclick="filtrarFamilia('maderas', this)">Viento Madera</button>
+            <button class="filtro-btn" onclick="filtrarFamilia('cuerdas', this)">Cuerdas Frotadas</button>
         </div>
-
-        <div class="grid-productos" id="contenedor-productos">
-            <div class="producto-card revelar" data-categoria="guitarras" data-nombre="guitarra clásica maestro cedro" data-usd="890" data-eur="820">
-                <div class="img-contenedor" onclick="abrirQuickView('Guitarra Clásica \"Maestro\"', 'Cuerdas Pulsadas', '$890', '€820', 'Madera de cedro canadiense curado con armónicos profundos y respuesta dinámica ideal para conciertos acústicos.', '4.9/5 (18 Solistas)', '890', '820')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(18 Solistas)</span></div>
-                    <span class="etiqueta">Cuerdas Pulsadas</span>
-                    <h4 onclick="abrirQuickView('Guitarra Clásica \"Maestro\"', 'Cuerdas Pulsadas', '$890', '€820', 'Madera de cedro canadiense curado con armónicos profundos y respuesta dinámica ideal para conciertos acústicos.', '4.9/5 (18 Solistas)', '890', '820')">Guitarra Clásica "Maestro"</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$890</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Guitarra Clásica Maestro', 890, 820)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="guitarras" data-nombre="guitarra eléctrica v-custom fresno" data-usd="1150" data-eur="1060">
-                <div class="img-contenedor" onclick="abrirQuickView('Guitarra Eléctrica V-Custom', 'Cuerdas Pulsadas', '$1,150', '€1,060', 'Cuerpo de fresno macizo con pastillas de alta ganancia calibradas en laboratorio Vértice.', '5.0/5 (32 Artistas)', '1150', '1060')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3L18 9M6 21L18 15M3 12h18"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(32 Artistas)</span></div>
-                    <span class="etiqueta">Cuerdas Pulsadas</span>
-                    <h4 onclick="abrirQuickView('Guitarra Eléctrica V-Custom', 'Cuerdas Pulsadas', '$1,150', '€1,060', 'Cuerpo de fresno macizo con pastillas de alta ganancia calibradas en laboratorio Vértice.', '5.0/5 (32 Artistas)', '1150', '1060')">Guitarra Eléctrica V-Custom</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,150</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Guitarra Eléctrica V-Custom', 1150, 1060)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="guitarras" data-nombre="bajo eléctrico 4-cuerdas activo" data-usd="1050" data-eur="970">
-                <div class="img-contenedor" onclick="abrirQuickView('Bajo Vértice 4-Cuerdas', 'Cuerdas Pulsadas', '$1,050', '€970', 'Circuitería activa de 3 bandas y mástil de arce reforzado para graves definidos y contundentes.', '4.8/5 (14 Bajistas)', '1050', '970')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M4 20L20 4M12 2v20"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(14 Bajistas)</span></div>
-                    <span class="etiqueta">Cuerdas Pulsadas</span>
-                    <h4>Bajo Vértice 4-Cuerdas</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,050</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Bajo Vértice 4-Cuerdas', 1050, 970)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="cuerdas" data-nombre="violín maestro strad abeto" data-usd="1450" data-eur="1340">
-                <div class="img-contenedor" onclick="abrirQuickView('Violín Maestro \"Strad\"', 'Cuerdas Frotadas', '$1,450', '€1,340', 'Inspirado en patrones clásicos de Cremona con abeto europeo envejecido de primera selección.', '5.0/5 (45 Primeros Violines)', '1450', '1340')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9 4l6 2M8 18l8-2M10 21h4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(45 Primeros Violines)</span></div>
-                    <span class="etiqueta">Cuerdas Frotadas</span>
-                    <h4>Violín Maestro "Strad"</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,450</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Violín Maestro Strad', 1450, 1340)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="cuerdas" data-nombre="viola orquestal v-16 16 pulgadas" data-usd="1680" data-eur="1550">
-                <div class="img-contenedor" onclick="abrirQuickView('Viola Orquestal V-16', 'Cuerdas Frotadas', '$1,680', '€1,550', 'Tonalidad profunda y rica en matices medios, diseñada para secciones sinfónicas de alta exigencia.', '4.9/5 (21 Violistas)', '1680', '1550')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M8 4l8 2M7 17l10-2M9 22h6"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(21 Violistas)</span></div>
-                    <span class="etiqueta">Cuerdas Frotadas</span>
-                    <h4>Viola Orquestal V-16</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,680</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Viola Orquestal V-16', 1680, 1550)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="cuerdas" data-nombre="violonchelo concert arce flameado" data-usd="2900" data-eur="2680">
-                <div class="img-contenedor" onclick="abrirQuickView('Violonchelo Concert', 'Cuerdas Frotadas', '$2,900', '€2,680', 'Proyección expansiva y calidez inigualable gracias a su tapa de abeto macizo y fondo de arce flameado.', '5.0/5 (19 Chelistas)', '2900', '2680')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M7 3l10 3M6 18l12-3M10 23h4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(19 Chelistas)</span></div>
-                    <span class="etiqueta">Cuerdas Frotadas</span>
-                    <h4>Violonchelo Concert</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$2,900</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Violonchelo Concert', 2900, 2680)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="cuerdas" data-nombre="contrabajo sinfónico b-99 abeto" data-usd="3800" data-eur="3510">
-                <div class="img-contenedor" onclick="abrirQuickView('Contrabajo Sinfónico B-99', 'Cuerdas Frotadas', '$3,800', '€3,510', 'El pilar fundamental de la sección grave orquestal. Construcción robusta de alta estabilidad mecánica.', '5.0/5 (11 Contrabajistas)', '3800', '3510')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M5 4l14 4M4 19l16-4M9 23h6"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(11 Contrabajistas)</span></div>
-                    <span class="etiqueta">Cuerdas Frotadas</span>
-                    <h4>Contrabajo Sinfónico B-99</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$3,800</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Contrabajo Sinfónico B-99', 3800, 3510)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="metales" data-nombre="trompeta v1 studio pro latón" data-usd="680" data-eur="630">
-                <div class="img-contenedor" onclick="abrirQuickView('Trompeta V1 Studio Pro', 'Viento Metal', '$680', '€630', 'Pistones de aleación monel con acción ultrarrápida y brillantez focalizada para jazz y sinfónica.', '4.9/5 (28 Solistas)', '680', '630')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v6L3 17v-6z"></path><path d="M11 9v6"></path><path d="M15 8v8"></path><path d="M7 10v4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(28 Solistas)</span></div>
-                    <span class="etiqueta">Viento Metal</span>
-                    <h4>Trompeta V1 Studio Pro</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$680</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Trompeta V1 Studio Pro', 680, 630)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="metales" data-nombre="corno francés f-double doble fa sib" data-usd="1950" data-eur="1800">
-                <div class="img-contenedor" onclick="abrirQuickView('Corno Francés F-Double', 'Viento Metal', '$1,950', '€1,800', 'Doble afinación Fa/Sib con campana desmontable y excelente homogeneidad en registros agudos.', '4.8/5 (16 Cornistas)', '1950', '1800')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M12 4v4M16 16l4 4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(16 Cornistas)</span></div>
-                    <span class="etiqueta">Viento Metal</span>
-                    <h4>Corno Francés F-Double</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,950</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Corno Francés F-Double', 1950, 1800)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="metales" data-nombre="trombón sinfónico t-pro tenor" data-usd="1150" data-eur="1060">
-                <div class="img-contenedor" onclick="abrirQuickView('Trombón Sinfónico T-Pro', 'Viento Metal', '$1,150', '€1,060', 'Vara de níquel plateado con tolerancia milimétrica para un deslizamiento suave y sin fricción.', '4.9/5 (22 Trombonistas)', '1150', '1060')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h16M2 14h12M18 6l4 8-4 8"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(22 Trombonistas)</span></div>
-                    <span class="etiqueta">Viento Metal</span>
-                    <h4>Trombón Sinfónico T-Pro</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,150</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Trombón Sinfónico T-Pro', 1150, 1060)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="metales" data-nombre="tuba orquestal bass-v en do sib" data-usd="3500" data-eur="3230">
-                <div class="img-contenedor" onclick="abrirQuickView('Tuba Orquestal Bass-V', 'Viento Metal', '$3,500', '€3,230', 'Sonoridad imponente y resonancia envolvente con sistema de válvulas rotativas de precisión alemana.', '5.0/5 (9 Tubistas)', '3500', '3230')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16M7 14h10M12 6v8M10 6h4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(9 Tubistas)</span></div>
-                    <span class="etiqueta">Viento Metal</span>
-                    <h4>Tuba Orquestal Bass-V</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$3,500</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Tuba Orquestal Bass-V', 3500, 3230)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="maderas" data-nombre="flauta traversa meister plata esterlina" data-usd="920" data-eur="850">
-                <div class="img-contenedor" onclick="abrirQuickView('Flauta Traversa Meister', 'Viento Madera', '$920', '€850', 'Cabeza de plata esterlina 925 con chimenea estirada a mano para armónicos cristalinos.', '4.9/5 (25 Flautistas)', '920', '850')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M6 10v4M10 10v4M14 10v4M18 10v4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(25 Flautistas)</span></div>
-                    <span class="etiqueta">Viento Madera</span>
-                    <h4>Flauta Traversa Meister</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$920</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Flauta Traversa Meister', 920, 850)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="maderas" data-nombre="clarinete profesional c-10 granadilla" data-usd="890" data-eur="820">
-                <div class="img-contenedor" onclick="abrirQuickView('Clarinete Profesional C-10', 'Viento Madera', '$890', '€820', 'Construido en madera de granadilla africana tratada contra humedad y llaves plateadas con plata pura.', '4.8/5 (30 Clarinetistas)', '890', '820')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M10 5l4 2M10 12l4 2M10 19l4 2"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(30 Clarinetistas)</span></div>
-                    <span class="etiqueta">Viento Madera</span>
-                    <h4>Clarinete Profesional C-10</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$890</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Clarinete Profesional C-10', 890, 820)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="maderas" data-nombre="oboe sinfónico o-series conservatorio" data-usd="1300" data-eur="1200">
-                <div class="img-contenedor" onclick="abrirQuickView('Oboe Sinfónico O-Series', 'Viento Madera', '$1,300', '€1,200', 'Sistema conservatorio completo con entonación estable y timbre penetrante de alta pureza.', '4.9/5 (15 Oboístas)', '1300', '1200')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M9 7h6M9 12h6M9 17h6"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(15 Oboístas)</span></div>
-                    <span class="etiqueta">Viento Madera</span>
-                    <h4>Oboe Sinfónico O-Series</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$1,300</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Oboe Sinfónico O-Series', 1300, 1200)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="producto-card revelar" data-categoria="maderas" data-nombre="fagot orquestal bassoon arce rojo" data-usd="4200" data-eur="3880">
-                <div class="img-contenedor" onclick="abrirQuickView('Fagot Orquestal Bassoon', 'Viento Madera', '$4,200', '€3,880', 'La cúspide de los vientos madera. Maderas nobles estacionadas y sistema mecánico de alta complejidad.', '5.0/5 (8 Fagotistas)', '4200', '3880')">
-                    <svg class="svg-instrumento" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M8 4l8 4M8 16l8-4"></path></svg>
-                </div>
-                <div class="producto-info">
-                    <div class="valoracion-estrellas">★★★★★ <span>(8 Fagotistas)</span></div>
-                    <span class="etiqueta">Viento Madera</span>
-                    <h4>Fagot Orquestal Bassoon</h4>
-                    <div class="producto-footer">
-                        <div class="precio display-precio">$4,200</div>
-                        <button class="btn-comprar-item" onclick="agregarAlCarrito('Fagot Orquestal Bassoon', 4200, 3880)">Agregar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="grid-productos" id="grid-instrumentos"></div>
     </section>
 
+    <!-- SECCIÓN 2: ACCESORIOS Y REPUESTOS -->
+    <section class="seccion" id="accesorios" style="border-top: 1px solid var(--borde); padding-top: 70px;">
+        <h2 class="titulo-seccion">Accesorios y Repuestos</h2>
+        <div class="filtros-catalogo" id="filtros-acc">
+            <button class="filtro-btn activo" onclick="filtrarAccesorios('todos', this)">Todos los Accesorios</button>
+            <button class="filtro-btn" onclick="filtrarAccesorios('cuerdas-acc', this)">Cuerdas</button>
+            <button class="filtro-btn" onclick="filtrarAccesorios('canas', this)">Cañas</button>
+            <button class="filtro-btn" onclick="filtrarAccesorios('boquillas', this)">Boquillas</button>
+            <button class="filtro-btn" onclick="filtrarAccesorios('sordinas', this)">Sordinas</button>
+        </div>
+        <div class="grid-productos" id="grid-accesorios"></div>
+    </section>
+
+    <!-- TESTIMONIOS -->
     <section class="testimonios" id="testimonios">
         <h2 class="titulo-seccion revelar" style="justify-content: center; border: none;">Aprobado en Escenario</h2>
         <div class="testimonios-grid">
             <div class="testimonio-card revelar">
-                <p>"La estabilidad en la afinación de las cuerdas Vértice es impresionante. Soportan jornadas de ensayos intensas sin perder cuerpo ni brillo."</p>
-                <div class="testimonio-autor">Gabriel Sanabria<span>Primer Violín, Ensamble Sinfónico</span></div>
+                <p>"Los instrumentos de polímero son mi salvación para los ensayos de marcha y las prácticas nocturnas con sordina. ¡No pesan nada!"</p>
+                <div class="testimonio-autor">Alejandro M.<span>Trompetista de Sesión</span></div>
             </div>
             <div class="testimonio-card revelar" style="transition-delay: 0.1s;">
-                <p>"La respuesta de los pistones en la trompeta V1 Studio es de lo más rápido que he probado en años. Proyección limpia y directa."</p>
-                <div class="testimonio-autor">Alejandro M.<span>Solista de Viento Metal</span></div>
+                <p>"El violín 3D superó mis expectativas. Tiene una resonancia cálida y nunca tengo que preocuparme por los cambios de clima en mis giras."</p>
+                <div class="testimonio-autor">Valeria S.<span>Primer Violín, Ensamble Acústico</span></div>
             </div>
         </div>
     </section>
 
+    <!-- SOPORTE -->
     <section class="soporte-seccion" id="soporte">
         <h2 class="titulo-seccion revelar" style="justify-content: center; border: none;">Asistencia y Especificaciones</h2>
         <div class="soporte-grid">
             <div class="soporte-item revelar">
-                <h3 class="soporte-pregunta">¿Cuál es la cobertura de la garantía de fábrica?</h3>
-                <p class="soporte-respuesta">Todos nuestros instrumentos cuentan con una garantía estructural, de afinación y mecánica de 5 años, respaldada directamente por nuestros talleres de luthería y control de calidad.</p>
+                <h3 class="soporte-pregunta">¿Los instrumentos compuestos resisten el clima tropical?</h3>
+                <p class="soporte-respuesta">Sí. Nuestros instrumentos están fabricados en polímeros, resinas ABS y fibras que son 100% inmunes a la humedad y los cambios bruscos de temperatura, manteniéndose afinados en cualquier entorno.</p>
             </div>
         </div>
     </section>
 
-    <a href="https://wa.me/584166138537?text=Hola,%20quisiera%20asesoría%20sobre%20los%20instrumentos%20Vértice." target="_blank" class="whatsapp-flotante">
+    <a href="https://wa.me/584166138537?text=Hola,%20quisiera%20asesoría%20sobre%20el%20catálogo%20Vértice." target="_blank" class="whatsapp-flotante">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.004-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
     </a>
 
-    <div class="footer" id="contacto">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <div class="logo" style="color: var(--texto-claro); font-family: 'Oswald'; font-size: 28px; margin-bottom: 15px; letter-spacing: 4px;">VÉRTICE<span>.</span></div>
-                <p>Precisión industrial al servicio del sonido puro.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Contacto de Fábrica</h4>
-                <a href="mailto:clariviola@gmail.com">clariviola@gmail.com</a>
-                <p style="color: var(--texto-gris); font-size: 15px;">Tel: +58 416-6138537</p>
-            </div>
-        </div>
-        <div class="copyright">&copy; 2026 Vértice Instrumentos de Precisión. Todos los derechos reservados.</div>
+    <div class="footer">
+        <p class="copyright">&copy; 2026 Vértice. Ingeniería Acústica. Todos los derechos reservados.</p>
     </div>
 
     <script>
-        let carrito = JSON.parse(localStorage.getItem('vertice_carrito')) || [];
-        let ordenes = JSON.parse(localStorage.getItem('vertice_ordenes')) || [];
+        const catalogoCompleto = [
+            // INSTRUMENTOS
+            { id: 1, tipo: 'inst', nombre: "Trompeta de Plástico", cat: "metales", usd: 100 },
+            { id: 2, tipo: 'inst', nombre: "Trombón de Plástico", cat: "metales", usd: 150 },
+            { id: 3, tipo: 'inst', nombre: "Violín de Plástico (4/4)", cat: "cuerdas", usd: 200 },
+            { id: 4, tipo: 'inst', nombre: "Violín de Plástico (3/4)", cat: "cuerdas", usd: 200 },
+            { id: 5, tipo: 'inst', nombre: "Violín de Plástico (1/2)", cat: "cuerdas", usd: 200 },
+            { id: 6, tipo: 'inst', nombre: "Violín de Plástico (1/4)", cat: "cuerdas", usd: 70 },
+            { id: 7, tipo: 'inst', nombre: "Violín de Plástico (1/8)", cat: "cuerdas", usd: 30 },
+            { id: 8, tipo: 'inst', nombre: "Viola de Plástico (15\")", cat: "cuerdas", usd: 300 },
+            { id: 9, tipo: 'inst', nombre: "Viola de Plástico (14\")", cat: "cuerdas", usd: 300 },
+            { id: 10, tipo: 'inst', nombre: "Viola de Plástico (13\")", cat: "cuerdas", usd: 200 },
+            { id: 11, tipo: 'inst', nombre: "Cello de Plástico (4/4)", cat: "cuerdas", usd: 1500 },
+            { id: 12, tipo: 'inst', nombre: "Cello de Plástico (3/4)", cat: "cuerdas", usd: 1500 },
+            { id: 13, tipo: 'inst', nombre: "Cello de Plástico (1/2)", cat: "cuerdas", usd: 1500 },
+            { id: 14, tipo: 'inst', nombre: "Clarinete de Plástico para Niño", cat: "maderas", usd: 150 },
+            { id: 15, tipo: 'inst', nombre: "Flauta de Plástico para Niño", cat: "maderas", usd: 130 },
+            { id: 16, tipo: 'inst', nombre: "Oboe de Plástico para Niño", cat: "maderas", usd: 1800 },
+            { id: 17, tipo: 'inst', nombre: "Fagot de Plástico para Niño", cat: "maderas", usd: 4500 },
+            { id: 18, tipo: 'inst', nombre: "Trompeta de Plástico (Variante 2)", cat: "metales", usd: 130 },
+            { id: 19, tipo: 'inst', nombre: "Corno de Plástico", cat: "metales", usd: 400 },
+            { id: 20, tipo: 'inst', nombre: "Corno de Plástico (Alto/Mini)", cat: "metales", usd: 130 },
+
+            // ACCESORIOS
+            { id: 21, tipo: 'acc', nombre: "Cuerdas para Violín", cat: "cuerdas-acc", usd: 20 },
+            { id: 22, tipo: 'acc', nombre: "Cuerdas para Viola", cat: "cuerdas-acc", usd: 25 },
+            { id: 23, tipo: 'acc', nombre: "Cuerdas para Cello", cat: "cuerdas-acc", usd: 60 },
+            { id: 24, tipo: 'acc', nombre: "Cuerdas para Contrabajo", cat: "cuerdas-acc", usd: 120 },
+            { id: 25, tipo: 'acc', nombre: "Cuerdas para Guitarra (Clásica)", cat: "cuerdas-acc", usd: 6 },
+            { id: 26, tipo: 'acc', nombre: "Cuerdas para Cuatro Venezolano", cat: "cuerdas-acc", usd: 5 },
+            { id: 27, tipo: 'acc', nombre: "Cuerdas para Arpa Llanera", cat: "cuerdas-acc", usd: 15 },
+            { id: 28, tipo: 'acc', nombre: "Cuerdas para Mandolina", cat: "cuerdas-acc", usd: 6 },
+            { id: 29, tipo: 'acc', nombre: "Cañas para Clarinete", cat: "canas", usd: 25 },
+            { id: 30, tipo: 'acc', nombre: "Cañas para Oboe", cat: "canas", usd: 15 },
+            { id: 31, tipo: 'acc', nombre: "Cañas para Fagot", cat: "canas", usd: 15 },
+            { id: 32, tipo: 'acc', nombre: "Boquilla para Trompeta", cat: "boquillas", usd: 40 },
+            { id: 33, tipo: 'acc', nombre: "Boquilla para Trombón", cat: "boquillas", usd: 45 },
+            { id: 34, tipo: 'acc', nombre: "Boquilla para Corno", cat: "boquillas", usd: 30 },
+            { id: 35, tipo: 'acc', nombre: "Boquilla para Tuba", cat: "boquillas", usd: 75 },
+            { id: 36, tipo: 'acc', nombre: "Sordina para Trompeta", cat: "sordinas", usd: 25 },
+            { id: 37, tipo: 'acc', nombre: "Sordina para Trombón", cat: "sordinas", usd: 30 },
+            { id: 38, tipo: 'acc', nombre: "Sordina para Corno", cat: "sordinas", usd: 35 },
+            { id: 39, tipo: 'acc', nombre: "Sordina para Tuba", cat: "sordinas", usd: 80 }
+        ];
+
+        let carrito = JSON.parse(localStorage.getItem('vertice_cart_final')) || [];
+        let ordenes = JSON.parse(localStorage.getItem('vertice_ord_final')) || [];
         let monedaActual = 'USD';
+        let filtroInstActivo = 'todos';
+        let filtroAccActivo = 'todos';
+
+        // LÓGICA DE DIBUJO DE SILUETAS SÓLIDAS
+        function obtenerIconoSVG(nombre, cat) {
+            let n = nombre.toLowerCase();
+            let c = cat.toLowerCase();
+
+            if (c === 'cuerdas' || n.includes('violín') || n.includes('violin') || n.includes('viola') || n.includes('cello') || n.includes('contrabajo')) {
+                return '<path d="M16 8c0-2.5-1.5-4-4-4S8 5.5 8 8c0 1.5.5 2.5 1.5 3.5C8.5 12.5 8 14 8 16c0 2.5 1.5 4 4 4s4-1.5 4-4c0-2-.5-3.5-1.5-4.5C15.5 10.5 16 9.5 16 8z" fill="var(--cobre)"/><path d="M12 2v20" stroke="var(--bg-oscuro)" stroke-width="2" stroke-linecap="round"/>';
+            }
+            
+            if (c === 'metales' || n.includes('trompeta') || n.includes('trombón') || n.includes('trombon') || n.includes('corno') || n.includes('tuba')) {
+                return '<path d="M21 8c0-1-1-2-2-2H6V4H4v16h2v-2h13c1 0 2-1 2-2V8z" fill="var(--cobre)"/><path d="M8 8v8M12 8v8M16 8v8" stroke="var(--bg-oscuro)" stroke-width="2"/>';
+            }
+
+            if (c === 'maderas' || n.includes('flauta') || n.includes('clarinete') || n.includes('oboe') || n.includes('fagot')) {
+                return '<path d="M10 2h4v20h-4z" fill="var(--cobre)"/><circle cx="12" cy="6" r="1" fill="var(--bg-oscuro)"/><circle cx="12" cy="10" r="1" fill="var(--bg-oscuro)"/><circle cx="12" cy="14" r="1" fill="var(--bg-oscuro)"/><circle cx="12" cy="18" r="1" fill="var(--bg-oscuro)"/>';
+            }
+
+            if (c === 'canas' || n.includes('caña') || n.includes('cana')) {
+                return '<path d="M9 2c0 0 3-2 6 0l1 20H8l1-20z" fill="var(--cobre)"/><path d="M8 10h8" stroke="var(--bg-oscuro)" stroke-width="2"/>';
+            }
+
+            if (c === 'boquillas' || n.includes('boquilla')) {
+                return '<path d="M8 4h8v2l-2 6v8h-4v-8l-2-6V4z" fill="var(--cobre)"/><path d="M10 4v2h4V4h-4z" fill="var(--bg-oscuro)"/>';
+            }
+
+            if (c === 'sordinas' || n.includes('sordina')) {
+                return '<path d="M6 18h12l-3-14h-6l-3 14z" fill="var(--cobre)"/><path d="M8 2h8v2H8z" fill="var(--cobre)"/><path d="M7 14h10" stroke="var(--bg-oscuro)" stroke-width="2"/>';
+            }
+
+            if (c === 'cuerdas-acc' || n.includes('cuerdas')) {
+                return '<circle cx="12" cy="12" r="10" stroke="var(--cobre)" stroke-width="2" fill="none"/><path d="M9 6v12M12 6v12M15 6v12" stroke="var(--cobre)" stroke-width="1.5"/>';
+            }
+
+            return '<circle cx="12" cy="12" r="10" fill="var(--cobre)"/>';
+        }
 
         const cursor = document.getElementById('cursorLuz');
         window.addEventListener('mousemove', (e) => {
@@ -876,44 +714,75 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        function mostrarToast(mensaje) {
-            const toast = document.getElementById('toastNotificacion');
-            toast.innerText = mensaje;
-            toast.classList.add('mostrar');
-            setTimeout(() => { toast.classList.remove('mostrar'); }, 2500);
+        function renderizarCatalogos() {
+            const gridInst = document.getElementById('grid-instrumentos');
+            const gridAcc = document.getElementById('grid-accesorios');
+            gridInst.innerHTML = '';
+            gridAcc.innerHTML = '';
+
+            catalogoCompleto.forEach(prod => {
+                const precioMostrado = monedaActual === 'USD' ? `$${prod.usd.toLocaleString()}` : `€${Math.round(prod.usd * 0.92).toLocaleString()}`;
+                const siluetaSVG = obtenerIconoSVG(prod.nombre, prod.cat);
+                
+                const card = document.createElement('div');
+                card.className = `producto-card ${prod.tipo === 'inst' ? 'card-inst' : 'card-acc'}`;
+                card.setAttribute('data-id', prod.id);
+                card.setAttribute('data-nombre', prod.nombre.toLowerCase());
+                card.setAttribute('data-cat', prod.cat);
+
+                const openModalFn = `abrirQuickView('${prod.nombre}', '${prod.cat.toUpperCase()}', '$${prod.usd.toLocaleString()}', '€${Math.round(prod.usd * 0.92).toLocaleString()}', 'Especificaciones profesionales de Vértice para este artículo.', '4.9/5', ${prod.usd}, ${Math.round(prod.usd * 0.92)}, '${prod.cat}')`;
+
+                card.innerHTML = `
+                    <div class="img-contenedor" onclick="${openModalFn}">
+                        <svg class="svg-instrumento" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            ${siluetaSVG}
+                        </svg>
+                    </div>
+                    <div class="producto-info">
+                        <h4 style="cursor:pointer;" onclick="${openModalFn}">${prod.nombre}</h4>
+                        <div class="producto-footer">
+                            <div class="precio">${precioMostrado}</div>
+                            <button class="btn-comprar-item" onclick="agregarAlCarrito(${prod.id})">Agregar</button>
+                        </div>
+                    </div>
+                `;
+
+                if (prod.tipo === 'inst') {
+                    gridInst.appendChild(card);
+                } else {
+                    gridAcc.appendChild(card);
+                }
+            });
+
+            aplicarFiltrosVisuales();
         }
 
-        function toggleCarrito() {
-            const drawer = document.getElementById('carritoDrawer');
-            drawer.classList.toggle('abierto');
-        }
-
-        function guardarCarritoStorage() {
-            localStorage.setItem('vertice_carrito', JSON.stringify(carrito));
-        }
-
-        function agregarAlCarrito(nombre, usd, eur) {
-            const precio = monedaActual === 'USD' ? usd : eur;
+        function agregarAlCarrito(id) {
+            const prod = catalogoCompleto.find(p => p.id === id);
+            const precio = monedaActual === 'USD' ? prod.usd : Math.round(prod.usd * 0.92);
             const simbolo = monedaActual === 'USD' ? '$' : '€';
-            
-            const existente = carrito.find(item => item.nombre === nombre);
+
+            const existente = carrito.find(item => item.id === id);
             if (existente) {
                 existente.cantidad += 1;
             } else {
-                carrito.push({ nombre, precio, simbolo, cantidad: 1, usdBase: usd, eurBase: eur });
+                carrito.push({ ...prod, precio, simbolo, cantidad: 1, usdBase: prod.usd, eurBase: Math.round(prod.usd * 0.92) });
             }
-            
-            guardarCarritoStorage();
+
+            guardarStorage();
             actualizarCarritoUI();
-            mostrarToast(`Añadido: ${nombre}`);
+            mostrarToast(`Añadido: ${prod.nombre}`);
         }
 
-        function cambiarCantidad(index, delta) {
-            carrito[index].cantidad += delta;
-            if (carrito[index].cantidad <= 0) {
-                carrito.splice(index, 1);
+        function cambiarCantidad(id, delta) {
+            const item = carrito.find(p => p.id === id);
+            if (item) {
+                item.cantidad += delta;
+                if (item.cantidad <= 0) {
+                    carrito = carrito.filter(p => p.id !== id);
+                }
             }
-            guardarCarritoStorage();
+            guardarStorage();
             actualizarCarritoUI();
         }
 
@@ -934,45 +803,116 @@
             container.innerHTML = '';
             let suma = 0;
 
-            carrito.forEach((item, index) => {
-                let precioActual = monedaActual === 'USD' ? item.usdBase : item.eurBase;
-                item.precio = precioActual;
-                let subtotal = precioActual * item.cantidad;
+            carrito.forEach(item => {
+                const precioUnit = monedaActual === 'USD' ? item.usdBase : item.eurBase;
+                const subtotal = precioUnit * item.cantidad;
                 suma += subtotal;
+                const simbolo = monedaActual === 'USD' ? '$' : '€';
 
                 container.innerHTML += `
                     <div class="carrito-item-row">
                         <div class="carrito-item-info">
                             <h5>${item.nombre}</h5>
-                            <span>${item.simbolo}${subtotal.toLocaleString()}</span>
+                            <span>${simbolo}${subtotal.toLocaleString()}</span>
                             <div class="controles-cantidad">
-                                <button class="btn-cant" onclick="cambiarCantidad(${index}, -1)">-</button>
+                                <button class="btn-cant" onclick="cambiarCantidad(${item.id}, -1)">-</button>
                                 <span>${item.cantidad}</span>
-                                <button class="btn-cant" onclick="cambiarCantidad(${index}, 1)">+</button>
+                                <button class="btn-cant" onclick="cambiarCantidad(${item.id}, 1)">+</button>
                             </div>
                         </div>
-                        <button class="btn-eliminar" onclick="carrito.splice(${index}, 1); guardarCarritoStorage(); actualizarCarritoUI();">Quitar</button>
+                        <button class="btn-eliminar" onclick="carrito = carrito.filter(p => p.id !== ${item.id}); guardarStorage(); actualizarCarritoUI();">Quitar</button>
                     </div>
                 `;
             });
 
-            totalPrecio.innerText = `${carrito[0].simbolo}${suma.toLocaleString()}`;
+            totalPrecio.innerText = `${monedaActual === 'USD' ? '$' : '€'}${suma.toLocaleString()}`;
         }
 
-        function abrirQuickView(nombre, etiqueta, usdStr, eurStr, desc, valoracion, usdNum, eurNum) {
+        function guardarStorage() {
+            localStorage.setItem('vertice_cart_final', JSON.stringify(carrito));
+            localStorage.setItem('vertice_ord_final', JSON.stringify(ordenes));
+        }
+
+        function toggleCarrito() {
+            document.getElementById('carritoDrawer').classList.toggle('abierto');
+        }
+
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toastNotificacion');
+            toast.innerText = mensaje;
+            toast.classList.add('mostrar');
+            setTimeout(() => { toast.classList.remove('mostrar'); }, 2500);
+        }
+
+        function cambiarMoneda() {
+            monedaActual = document.getElementById('selectorMoneda').value;
+            renderizarCatalogos();
+            actualizarCarritoUI();
+            mostrarToast(`Moneda cambiada a ${monedaActual}`);
+        }
+
+        function filtrarFamilia(categoria, btn) {
+            document.querySelectorAll('#filtros-inst .filtro-btn').forEach(b => b.classList.remove('activo'));
+            btn.classList.add('activo');
+            filtroInstActivo = categoria;
+            aplicarFiltrosVisuales();
+        }
+
+        function filtrarAccesorios(categoria, btn) {
+            document.querySelectorAll('#filtros-acc .filtro-btn').forEach(b => b.classList.remove('activo'));
+            btn.classList.add('activo');
+            filtroAccActivo = categoria;
+            aplicarFiltrosVisuales();
+        }
+
+        function buscarGlobal() {
+            aplicarFiltrosVisuales();
+        }
+
+        function aplicarFiltrosVisuales() {
+            const textoBusqueda = document.getElementById('inputBuscador').value.toLowerCase().trim();
+
+            document.querySelectorAll('.card-inst').forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                const nombre = card.getAttribute('data-nombre');
+                const coincideFiltro = (filtroInstActivo === 'todos' || cat === filtroInstActivo);
+                const coincideTexto = (textoBusqueda === '' || nombre.includes(textoBusqueda));
+
+                card.style.display = (coincideFiltro && coincideTexto) ? 'block' : 'none';
+            });
+
+            document.querySelectorAll('.card-acc').forEach(card => {
+                const cat = card.getAttribute('data-cat');
+                const nombre = card.getAttribute('data-nombre');
+                const coincideFiltro = (filtroAccActivo === 'todos' || cat === filtroAccActivo);
+                const coincideTexto = (textoBusqueda === '' || nombre.includes(textoBusqueda));
+
+                card.style.display = (coincideFiltro && coincideTexto) ? 'block' : 'none';
+            });
+        }
+
+        function abrirQuickView(nombre, etiqueta, usdStr, eurStr, desc, valoracion, usdNum, eurNum, cat) {
             document.getElementById('quickTitulo').innerText = nombre;
             document.getElementById('quickEtiqueta').innerText = etiqueta;
             document.getElementById('quickDesc').innerText = desc;
             document.getElementById('quickPrecio').innerText = monedaActual === 'USD' ? usdStr : eurStr;
             
+            // Reemplaza el ícono de la vista rápida con la silueta correcta
+            document.getElementById('quickViewIcon').innerHTML = obtenerIconoSVG(nombre, cat);
+            
             document.getElementById('quickSpecsList').innerHTML = `
                 <li>Valoración Profesional: <span>${valoracion}</span></li>
-                <li>Calibración: <span>Espectro 440Hz / 442Hz</span></li>
-                <li>Garantía de Fábrica: <span>5 Años Estructural</span></li>
+                <li>Material: <span>Polímero / Resina / Metales</span></li>
+                <li>Garantía de Fábrica: <span>1 Año Vértice</span></li>
             `;
 
             document.getElementById('quickBtnAgregar').onclick = function() {
-                agregarAlCarrito(nombre, usdNum, eurNum);
+                const arrFind = catalogoCompleto.find(i => i.nombre === nombre);
+                if (arrFind) {
+                    agregarAlCarrito(arrFind.id);
+                } else {
+                    agregarCustomAlCarrito();
+                }
                 cerrarQuickView();
             };
 
@@ -1011,7 +951,9 @@
             document.getElementById('resPrecio').innerText = monedaActual === 'USD' ? `$${totalUsd.toLocaleString()}` : `€${totalEur.toLocaleString()}`;
             
             window.customActualCalculo = {
-                nombre: `[Custom] ${tipoNombre} (${maderaNombre})`,
+                id: Date.now(), 
+                nombre: `[Custom] ${tipoNombre}`,
+                cat: 'custom',
                 usd: totalUsd,
                 eur: totalEur
             };
@@ -1021,10 +963,27 @@
             if (!window.customActualCalculo) {
                 actualizarCustom();
             }
-            const item = window.customActualCalculo;
-            agregarAlCarrito(item.nombre, item.usd, item.eur);
+            
+            const itemCustom = window.customActualCalculo;
+            const precio = monedaActual === 'USD' ? itemCustom.usd : itemCustom.eur;
+            const simbolo = monedaActual === 'USD' ? '$' : '€';
+
+            carrito.push({ 
+                id: itemCustom.id, 
+                nombre: itemCustom.nombre, 
+                precio: precio, 
+                simbolo: simbolo, 
+                cantidad: 1, 
+                usdBase: itemCustom.usd, 
+                eurBase: itemCustom.eur 
+            });
+            
+            guardarStorage();
+            actualizarCarritoUI();
             toggleCarrito();
-            mostrarToast("Instrumento Custom añadido con éxito");
+            mostrarToast("Instrumento Custom añadido");
+            
+            window.customActualCalculo.id = Date.now(); 
         }
 
         function abrirCheckout() {
@@ -1033,86 +992,64 @@
                 return;
             }
             toggleCarrito();
+            let suma = carrito.reduce((acc, i) => acc + ((monedaActual === 'USD' ? i.usdBase : i.eurBase) * i.cantidad), 0);
+            document.getElementById('checkoutTotalFinal').innerText = `${monedaActual === 'USD' ? '$' : '€'}${suma.toLocaleString()}`;
             document.getElementById('modalCheckout').style.display = 'flex';
-            actualizarTotalCheckout();
         }
 
         function cerrarCheckout() {
             document.getElementById('modalCheckout').style.display = 'none';
         }
 
-        function actualizarTotalCheckout() {
-            let suma = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-            let costoEnvio = parseInt(document.getElementById('pagoEnvio').value) || 0;
-            let totalFinal = suma + costoEnvio;
-            let simbolo = monedaActual === 'USD' ? '$' : '€';
-            document.getElementById('checkoutTotalFinal').innerText = `${simbolo}${totalFinal.toLocaleString()}`;
-        }
-
         function procesarPagoExitoso() {
             const nombre = document.getElementById('pagoNombre').value;
             const tarjeta = document.getElementById('pagoTarjeta').value;
-            const exp = document.getElementById('pagoExp').value;
-            const cvv = document.getElementById('pagoCvv').value;
             const dir = document.getElementById('pagoDir').value;
 
-            if (!nombre || !tarjeta || !exp || !cvv || !dir) {
-                alert('Por favor completa todos los campos de pago y envío.');
+            if (!nombre || !tarjeta || !dir) {
+                alert('Por favor completa todos los campos.');
                 return;
             }
 
             const btn = document.getElementById('btnProcesarPago');
-            btn.innerText = 'Procesando Transacción...';
+            btn.innerText = 'Procesando...';
             btn.disabled = true;
 
             setTimeout(() => {
                 const folio = 'VRT-' + Math.floor(100000 + Math.random() * 900000);
-                let suma = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-                let costoEnvio = parseInt(document.getElementById('pagoEnvio').value) || 0;
-                let totalFinal = suma + costoEnvio;
-                let simbolo = monedaActual === 'USD' ? '$' : '€';
+                let suma = carrito.reduce((acc, i) => acc + ((monedaActual === 'USD' ? i.usdBase : i.eurBase) * i.cantidad), 0);
+                const simbolo = monedaActual === 'USD' ? '$' : '€';
 
-                const nuevaOrden = {
+                const orden = {
                     folio,
                     titular: nombre,
                     destino: dir,
                     items: [...carrito],
-                    total: `${simbolo}${totalFinal.toLocaleString()}`,
-                    estado: 'En Laboratorio de Luthería',
+                    total: `${simbolo}${suma.toLocaleString()}`,
                     fecha: new Date().toLocaleDateString()
                 };
 
-                ordenes.push(nuevaOrden);
-                localStorage.setItem('vertice_ordenes', JSON.stringify(ordenes));
+                ordenes.push(orden);
+                guardarStorage();
 
-                btn.innerText = 'Procesar Pago Seguro';
+                btn.innerText = 'Completar Pedido';
                 btn.disabled = false;
                 cerrarCheckout();
 
-                mostrarFactura(nuevaOrden);
+                let itemsHtml = orden.items.map(i => `<p style="display:flex; justify-content:space-between; margin:4px 0;"><span>${i.nombre} (x${i.cantidad})</span> <span>${simbolo}${((monedaActual === 'USD' ? i.usdBase : i.eurBase) * i.cantidad).toLocaleString()}</span></p>`).join('');
+                document.getElementById('facturaContenidoDetalle').innerHTML = `
+                    <p><strong>Folio:</strong> ${orden.folio}</p>
+                    <p><strong>Titular:</strong> ${orden.titular}</p>
+                    <p><strong>Destino:</strong> ${orden.destino}</p>
+                    <div style="border-top:1px solid var(--borde); border-bottom:1px solid var(--borde); padding:8px 0; margin:10px 0;">${itemsHtml}</div>
+                    <p style="display:flex; justify-content:space-between; font-family:'Oswald'; font-size:18px;"><span>Total Pagado:</span> <span style="color:var(--cobre);">${orden.total}</span></p>
+                `;
+                document.getElementById('modalFactura').style.display = 'flex';
 
                 carrito = [];
-                guardarCarritoStorage();
+                guardarStorage();
                 actualizarCarritoUI();
-                mostrarToast("¡Compra procesada con éxito!");
-            }, 2000);
-        }
-
-        function mostrarFactura(orden) {
-            let itemsHtml = orden.items.map(i => `<p style="display:flex; justify-content:space-between; margin:5px 0;"><span>${i.nombre} (x${i.cantidad})</span> <span>${i.simbolo}${(i.precio * i.cantidad).toLocaleString()}</span></p>`).join('');
-            
-            document.getElementById('facturaContenidoDetalle').innerHTML = `
-                <p><strong>Folio de Orden:</strong> ${orden.folio}</p>
-                <p><strong>Titular:</strong> ${orden.titular}</p>
-                <p><strong>Fecha:</strong> ${orden.fecha}</p>
-                <p><strong>Dirección de Destino:</strong> ${orden.destino}</p>
-                <div style="border-top:1px solid var(--borde); border-bottom:1px solid var(--borde); padding:10px 0; margin:15px 0;">
-                    ${itemsHtml}
-                </div>
-                <p style="display:flex; justify-content:space-between; font-family:'Oswald'; font-size:18px;"><span>Total Pagado:</span> <span style="color:var(--cobre);">${orden.total}</span></p>
-                <p style="font-size: 11px; color: var(--texto-gris); text-align: center; margin-top: 15px;">Estado actual: [ ${orden.estado} ]</p>
-            `;
-            document.getElementById('modalFactura').style.display = 'flex';
+            }, 1500);
         }
 
         function cerrarFactura() {
@@ -1122,7 +1059,7 @@
         function abrirMisOrdenes() {
             const container = document.getElementById('listaMisOrdenes');
             if (ordenes.length === 0) {
-                container.innerHTML = `<p style="color: var(--texto-gris); text-align: center;">No hay órdenes registradas en este equipo.</p>`;
+                container.innerHTML = `<p style="color: var(--texto-gris); text-align: center;">No hay órdenes registradas.</p>`;
             } else {
                 container.innerHTML = '';
                 ordenes.forEach(o => {
@@ -1133,7 +1070,6 @@
                                 <span>${o.total}</span>
                             </div>
                             <p style="font-size:13px; color:var(--texto-gris); margin:5px 0;">Titular: ${o.titular} | Fecha: ${o.fecha}</p>
-                            <p style="font-size:12px; color:#fff; background:rgba(245,158,11,0.1); padding:4px 8px; border-radius:4px; display:inline-block; margin-top:5px;">Estatus: ${o.estado}</p>
                         </div>
                     `;
                 });
@@ -1145,81 +1081,21 @@
             document.getElementById('modalMisOrdenes').style.display = 'none';
         }
 
-        function cambiarMoneda() {
-            monedaActual = document.getElementById('selectorMoneda').value;
-            const tarjetas = document.querySelectorAll('.producto-card');
-            
-            tarjetas.forEach(tarjeta => {
-                const precioElem = tarjeta.querySelector('.display-precio');
-                if (monedaActual === 'USD') {
-                    const val = tarjeta.getAttribute('data-usd');
-                    precioElem.innerText = '$' + Number(val).toLocaleString();
-                } else {
-                    const val = tarjeta.getAttribute('data-eur');
-                    precioElem.innerText = '€' + Number(val).toLocaleString();
-                }
-            });
-            actualizarCustom();
-            actualizarCarritoUI();
-            mostrarToast(`Moneda cambiada a ${monedaActual}`);
-        }
-
-        function filtrarInstrumentos(categoria) {
-            const botones = document.querySelectorAll('.filtro-btn');
-            botones.forEach(btn => btn.classList.remove('activo'));
-            event.target.classList.add('activo');
-
-            const tarjetas = document.querySelectorAll('.producto-card');
-            tarjetas.forEach(tarjeta => {
-                const cat = tarjeta.getAttribute('data-categoria');
-                if (categoria === 'todos' || cat === categoria) {
-                    tarjeta.style.display = 'block';
-                } else {
-                    tarjeta.style.display = 'none';
-                }
-            });
-        }
-
-        function filtrarPorPrecio(rango) {
-            const botones = document.querySelectorAll('.filtro-btn');
-            botones.forEach(btn => btn.classList.remove('activo'));
-            event.target.classList.add('activo');
-
-            const tarjetas = document.querySelectorAll('.producto-card');
-            tarjetas.forEach(tarjeta => {
-                const usd = parseInt(tarjeta.getAttribute('data-usd'));
-                let mostrar = false;
-                if (rango === 'bajo' && usd < 1000) mostrar = true;
-                if (rango === 'medio' && usd >= 1000 && usd <= 2500) mostrar = true;
-                if (rango === 'alto' && usd > 2500) mostrar = true;
-
-                tarjeta.style.display = mostrar ? 'block' : 'none';
-            });
-        }
-
-        function buscarInstrumento() {
-            let input = document.getElementById('inputBuscador').value.toLowerCase();
-            let tarjetas = document.querySelectorAll('.producto-card');
-            tarjetas.forEach(tarjeta => {
-                let nombre = tarjeta.getAttribute('data-nombre');
-                if (nombre.includes(input)) {
-                    tarjeta.style.display = 'block';
-                } else {
-                    tarjeta.style.display = 'none';
-                }
-            });
-        }
-
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
-            setTimeout(() => { preloader.style.opacity = '0'; preloader.style.visibility = 'hidden'; }, 800);
+            setTimeout(() => { preloader.style.opacity = '0'; preloader.style.visibility = 'hidden'; }, 600);
+            renderizarCatalogos();
             actualizarCustom();
             actualizarCarritoUI();
-        });
 
-        document.addEventListener('DOMContentLoaded', function() {
+            // Animador de Scroll Restaurado
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('activo'); });
+                entries.forEach((entry) => { 
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('activo'); 
+                        observer.unobserve(entry.target);
+                    }
+                });
             }, { threshold: 0.1 });
             document.querySelectorAll('.revelar').forEach((el) => observer.observe(el));
         });
